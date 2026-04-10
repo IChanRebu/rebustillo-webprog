@@ -2,90 +2,92 @@ import Button from '../components/Button';
 
 const AboutPage = () => {
   return (
-    <div className="about-page min-h-screen bg-black text-white">
-      <div className="rounded-[1.25rem] border-2 border-red-700 bg-red-900 px-4 py-6">
-        <button className="max-w-md border-2 border-red-700 bg-black font-bold text-white px-4 mb-5" type="button">
-          About Christian Parker
+    <div className="about-page min-h-screen bg-black text-white px-6 py-10 sm:px-12">
+      <div className="rounded-[1.25rem] border border-white/20 bg-white/5 px-6 py-6 shadow-xl shadow-black/50 backdrop-blur-sm">
+        <button className="max-w-md rounded-full border border-white/20 bg-black/40 px-5 py-3 font-bold text-white shadow-sm shadow-white/10" type="button">
+          About Ulquiorra Cifer
         </button>
       </div>
 
-      <div className="mt-2 text-[11px] font-semibold uppercase tracking-[0.25em] text-red-200">
-        The Web-Slinger
+      <div className="mt-8 max-w-4xl space-y-6">
+        <div className="text-[11px] font-semibold uppercase tracking-[0.25em] text-white/70">
+          The Fourth Espada
+        </div>
+        <div className="text-4xl font-bold leading-tight text-white sm:text-5xl">
+          Ulquiorra Cifer: Emissary of Emptiness
+        </div>
+
+        <div className="text-base leading-8 text-white/80">
+          Ulquiorra Cifer is the No. 4 Espada in Sōsuke Aizen's army. Calm, analytical, and consumed by Nihil, he observes humanity with detached curiosity while embracing his role as a hollow enforcer.
+        </div>
+
+        <Button to="/articles" variant="primary" className="mt-1">Explore Ulquiorra</Button>
       </div>
-      <div className="max-w-xl text-xl font-bold leading-tight text-white">
-        The Amazing Spider-Man: A Hero's Journey
-      </div>
 
-      <div className="mt-4 max-w-xl text-sm leading-7 text-red-100 py-6">
-        Christian Parker, known to the world as Spider-Man, is New York City's greatest protector. With extraordinary spider-like abilities and a strong sense of responsibility, he fights crime and protects the innocent every day and night.
-      </div>
-
-      <button className="border-y-2 border-red-700 bg-red-900 px-4 py-6">
-        <p className="text-white">Explore Spider-Man</p>
-      </button>
-
-      <section className="border-y-2 border-red-700 bg-red-900 py-6">
-        <div className="text-[11px] font-semibold uppercase tracking-[0.25em] text-red-200">
-          Superpowers
-        </div>
-        <h2 className="text-2xl font-bold leading-tight text-white">Spider Abilities</h2>
-        <div className="mt-2 text-xl text-red-100">Superhuman strength, agility, web-slinging, and wall-crawling powers make Spider-Man formidable.</div>
-        <article className="rounded-3xl border-2 border-red-700 bg-black py-6 px-4">
-          <h3 className="text-lg font-semibold text-white">Enhanced Powers</h3>
-          <p className="text-red-100 mt-2">Super strength, enhanced reflexes, wall-crawling abilities, and web-generating powers.</p>
-        </article>
-      </section>
-
-      <section className="border-y-2 border-red-700 bg-red-900 py-6">
-        <div className="text-[11px] font-semibold uppercase tracking-[0.25em] text-red-200">
-          Allies
-        </div>
-        <h2 className="text-2xl font-bold leading-tight text-white">Trusted Companions</h2>
-        <article className="rounded-3xl border-2 border-red-700 bg-black py-6 px-4">
-          <h3 className="text-lg font-semibold text-white">His Girlfriend</h3>
-          <p className="text-red-100 mt-2">Fiona Stacy help Spider-Man navigate his dual life.</p>
-        </article>
-      </section>
-
-      <section className="border-y-2 border-red-700 bg-red-900 py-6">
-        <div className="text-[11px] font-semibold uppercase tracking-[0.25em] text-red-200">
-          Rogues Gallery
-        </div>
-        <h2 className="text-2xl font-bold leading-tight text-white">Greatest Enemies</h2>
-        <article className="rounded-3xl border-2 border-red-700 bg-black py-6 px-4">
-          <h3 className="text-lg font-semibold text-white">Greatest Rival</h3>
-          <p className="text-red-100 mt-2">Symbiote Spiderman.</p>
-        </article>
-      </section>
-
-      <section className="border-y-2 border-red-700 bg-red-900 py-6">
-        <div className="text-[11px] font-semibold uppercase tracking-[0.25em] text-red-200">
-          Achievements
-        </div>
-        <h2 className="text-2xl font-bold leading-tight text-white">Hero's Legacy</h2>
-        <article className="rounded-3xl border-2 border-red-700 bg-black py-6 px-4">
-          <h3 className="text-lg font-semibold text-white">Saved Cities</h3>
-          <p className="text-red-100 mt-2">Countless lives saved and major threats prevented through Spider-Man's heroic actions.</p>
-        </article>
-      </section>
-
-      <section className="border-y-2 border-red-700 bg-red-900 py-6">
-        <div className="text-[11px] font-semibold uppercase tracking-[0.25em] text-red-200">
-          Personal Life
-        </div>
-        <h2 className="text-2xl font-bold leading-tight text-white">Balancing Act</h2>
-        <article className="rounded-3xl border-2 border-red-700 bg-black py-6 px-4">
-          <h3 className="text-lg font-semibold text-white">Dual Identity</h3>
-          <p className="text-red-100 mt-2">Christian Parker struggles to balance his normal life as a student/photographer with his life as Spider-Man.</p>
-        </article>
-      </section>
-
-      <section className="border-y-2 border-red-700 bg-red-900 py-6">
-        <div className="grid gap-4 [grid-cols-[1.1fr,0.9fr]]">
-          <div className="text-[11px] font-semibold uppercase tracking-[0.25em] text-red-200">
-            True Origin
+      <section className="mt-12 space-y-8">
+        <div className="rounded-3xl border border-white/20 bg-white/5 p-8 shadow-xl shadow-black/50">
+          <div className="text-[11px] font-semibold uppercase tracking-[0.25em] text-white/70">
+            Hollow Powers
           </div>
-          <button className="text-2xl font-bold leading-tight text-white">Read Full Story</button>
+          <h2 className="mt-3 text-3xl font-bold text-white">Espada Abilities</h2>
+          <div className="mt-3 text-base leading-8 text-white/80">Ulquiorra wields immense Cero energy, regeneration, and the power to transform into Segunda Etapa.</div>
+          <article className="mt-8 rounded-3xl border border-white/20 bg-black/80 p-6 shadow-sm shadow-black/40">
+            <h3 className="text-lg font-semibold text-white">Resurrection Form</h3>
+            <p className="mt-3 text-white/75">His Segunda Etapa reveals even greater strength, speed, and durability than his base Arrancar form.</p>
+          </article>
+        </div>
+
+        <div className="rounded-3xl border border-white/20 bg-white/5 p-8 shadow-xl shadow-black/50">
+          <div className="text-[11px] font-semibold uppercase tracking-[0.25em] text-white/70">
+            Allies
+          </div>
+          <h2 className="mt-3 text-3xl font-bold text-white">Espada Brotherhood</h2>
+          <article className="mt-8 rounded-3xl border border-white/20 bg-black/80 p-6 shadow-sm shadow-black/40">
+            <h3 className="text-lg font-semibold text-white">Aizen and the Espada</h3>
+            <p className="mt-3 text-white/75">Ulquiorra serves Aizen loyally, standing alongside his fellow Espada as a calm and ruthless adversary.</p>
+          </article>
+        </div>
+
+        <div className="rounded-3xl border border-white/20 bg-white/5 p-8 shadow-xl shadow-black/50">
+          <div className="text-[11px] font-semibold uppercase tracking-[0.25em] text-white/70">
+            Rogues Gallery
+          </div>
+          <h2 className="mt-3 text-3xl font-bold text-white">Key Opponents</h2>
+          <article className="mt-8 rounded-3xl border border-white/20 bg-black/80 p-6 shadow-sm shadow-black/40">
+            <h3 className="text-lg font-semibold text-white">Ichigo Kurosaki</h3>
+            <p className="mt-3 text-white/75">Ulquiorra's most defining battle was against Ichigo, where he tested the limits of emotion and emptiness.</p>
+          </article>
+        </div>
+
+        <div className="rounded-3xl border border-white/20 bg-white/5 p-8 shadow-xl shadow-black/50">
+          <div className="text-[11px] font-semibold uppercase tracking-[0.25em] text-white/70">
+            Achievements
+          </div>
+          <h2 className="mt-3 text-3xl font-bold text-white">Hollow Legacy</h2>
+          <article className="mt-8 rounded-3xl border border-white/20 bg-black/80 p-6 shadow-sm shadow-black/40">
+            <h3 className="text-lg font-semibold text-white">Unmatched Resolve</h3>
+            <p className="mt-3 text-white/75">He is remembered for his cold logic, unwavering loyalty, and the chilling question, “What is a heart?”</p>
+          </article>
+        </div>
+
+        <div className="rounded-3xl border border-white/20 bg-white/5 p-8 shadow-xl shadow-black/50">
+          <div className="text-[11px] font-semibold uppercase tracking-[0.25em] text-white/70">
+            Personal Life
+          </div>
+          <h2 className="mt-3 text-3xl font-bold text-white">Emptiness and Thought</h2>
+          <article className="mt-8 rounded-3xl border border-white/20 bg-black/80 p-6 shadow-sm shadow-black/40">
+            <h3 className="text-lg font-semibold text-white">Questions of the Heart</h3>
+            <p className="mt-3 text-white/75">Although emotion seems distant, Ulquiorra's encounters with Orihime force him to question what it means to feel.</p>
+          </article>
+        </div>
+
+        <div className="rounded-3xl border border-white/20 bg-white/5 p-8 shadow-xl shadow-black/50">
+          <div className="grid gap-4 sm:grid-cols-[1.1fr,0.9fr]">
+            <div className="text-[11px] font-semibold uppercase tracking-[0.25em] text-white/70">
+              True Origin
+            </div>
+            <button className="text-2xl font-bold leading-tight text-white">Read Full Story</button>
+          </div>
         </div>
       </section>
     </div>
