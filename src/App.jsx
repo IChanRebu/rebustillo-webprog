@@ -6,8 +6,10 @@ import ArticlePage from './pages/ArticlePage';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import ArticleListPage from './pages/ArticleListPage';
+import DashboardPage from './pages/DashboardPage';
 
 import AuthLayout from './components/AuthLayout';
+import DashLayout from './components/DashLayout';
 import SignInPage from './pages/SignInPage';
 import SignUpPage from './pages/SignUpPage';
 
@@ -34,6 +36,17 @@ const routes = [
       {
         path: 'articles/:name',
         element: <ArticlePage />,
+      },
+    ],
+  },
+  {
+    path: 'dashboard',
+    element: <DashLayout />,
+    errorElement: <NotFoundPage />,
+    children: [
+      {
+        path: '',
+        element: <DashboardPage />,
       },
     ],
   },

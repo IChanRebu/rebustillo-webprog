@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Button from '../components/Button';
 
 const inputClasses = 
@@ -7,6 +8,23 @@ const inputClasses =
 const actionButtonClassName = 'w-full rounded-xl py-3 text-[11px] tracking-[0.2em]';
 
 const SignInPage = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    if (!email.trim() || !password.trim()) {
+      setError('Both email and password are required to enter.');
+      return;
+    }
+
+    setError('');
+    navigate('/');
+  };
+
   return (
     <>
       <div className="mb-8">
@@ -19,7 +37,7 @@ const SignInPage = () => {
         </p>
       </div>
 
-      <form className="mt-12 space-y-6 bg-white/5 rounded-2xl border border-gray-700 p-8">
+      <form onSubmit={handleSubmit} className="mt-12 space-y-6 bg-white/5 rounded-2xl border border-gray-700 p-8">
         <div>
           <label htmlFor="signin-email" className="text-sm font-semibold text-gray-300 uppercase tracking-[0.1em]">
             Email Address
@@ -29,6 +47,8 @@ const SignInPage = () => {
             type="email"
             placeholder="hollow@aizen.com"
             autoComplete="email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
             className={inputClasses}
           />
         </div>
@@ -42,12 +62,20 @@ const SignInPage = () => {
             type="password"
             placeholder="••••••••"
             autoComplete="current-password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
             className={inputClasses}
           />
           <p className="mt-3 text-xs leading-5 text-gray-400">
             Minimum 8 characters with letters, numbers, and symbols required.
           </p>
         </div>
+
+        {error && (
+          <div className="rounded-xl border border-red-500 bg-red-500/10 px-4 py-3 text-sm text-red-200">
+            {error}
+          </div>
+        )}
 
         <div className="flex items-center justify-between gap-4 text-sm">
           <label className="flex items-center gap-2 text-gray-300">
