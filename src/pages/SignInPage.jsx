@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../components/Button';
+import AuthService from '../services/AuthService.js';
 
 const inputClasses = 
   'mt-2 w-full rounded-xl border border-gray-700 bg-black px-4 py-3 text-sm text-white outline-none transition placeholder:text-gray-500 focus:border-gray-500 focus:bg-gray-900';
@@ -13,7 +14,7 @@ const SignInPage = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (!email.trim() || !password.trim()) {
@@ -21,8 +22,26 @@ const SignInPage = () => {
       return;
     }
 
-    setError('');
-    navigate('/');
+    try {
+      setError('');
+      const response = await AuthService.login({ email, password });
+
+      if (response.type === 'viewer') {
+        setError('Viewers are not allowed to log in to the dashboard.');
+        return;
+      }
+
+      AuthService.setAuth({
+        token: response.token,
+        type: response.type,
+        firstName: response.firstName,
+        email: response.user,
+      });
+
+      navigate('/dashboard');
+    } catch (err) {
+      setError(err.message || 'Unable to sign in.');
+    }
   };
 
   return (

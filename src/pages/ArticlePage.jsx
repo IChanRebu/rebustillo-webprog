@@ -1,4 +1,5 @@
 ﻿import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 import Button from '../components/Button';
 import articles from '../assets/article-content';
 import NotFoundPage from './NotFoundPage';
@@ -6,6 +7,16 @@ import NotFoundPage from './NotFoundPage';
 function ArticlePage() {
   const { name } = useParams();
   const article = articles.find((article) => article.name === name);
+
+  useEffect(() => {
+    if (article) {
+      document.title = article.title;
+      const link = document.querySelector("link[rel~='icon']") || document.createElement('link');
+      link.rel = 'icon';
+      link.href = article.image;
+      document.head.appendChild(link);
+    }
+  }, [article]);
 
   if (!article) {
     return <NotFoundPage />;
@@ -21,7 +32,7 @@ function ArticlePage() {
           {article.title}
         </h1>
         <div className="mt-4 text-sm leading-7 text-zinc-600">
-          {article.description}
+          {article.content.join(' ')}
         </div>
       </section>
 

@@ -9,6 +9,7 @@ const articles = [
     name: "ulquiorra-origin",
     image: article1,
     title: "Ulquiorra Cifer: The Origin",
+    status: "Active",
     content: [
       "Ulquiorra Cifer emerges as the Fourth Espada in Aizen’s Hollow Army, a quiet enforcer whose presence chills even the strongest fighters.",
       "He is defined by his analytical nature, emptiness, and the slowly growing curiosity about the human heart.",
@@ -19,6 +20,7 @@ const articles = [
     name: "ulquiorra-battles",
     image: article2,
     title: "Epic Battles of Ulquiorra",
+    status: "Active",
     content: [
       "His clash with Ichigo Kurosaki becomes one of the most dramatic fights in Soul Society, pushing both warriors to their limits.",
       "Ulquiorra’s speed, regeneration, and powerful Cero attacks make him a terrifying opponent even for advanced Soul Reapers.",
@@ -29,6 +31,7 @@ const articles = [
     name: "ulquiorra-emptiness",
     image: article3,
     title: "Ulquiorra and Emptiness",
+    status: "Draft",
     content: [
       "Ulquiorra speaks of emptiness as the ultimate truth, believing that hearts are a meaningless concept.",
       "His encounters with Orihime force him to question that belief, introducing doubt into his otherwise absolute worldview.",
@@ -39,6 +42,7 @@ const articles = [
     name: "ulquiorra-philosophy",
     image: article4,
     title: "Ulquiorra’s Philosophy",
+    status: "Active",
     content: [
       "He sees the world through the lens of nihilism, where human emotions are weak and insignificant.",
       "Ulquiorra’s measured voice and calm reasoning shape his identity as a thinker as much as a fighter.",
@@ -49,6 +53,7 @@ const articles = [
     name: "ulquiorra-legacy",
     image: article5,
     title: "The Legacy of Ulquiorra Cifer",
+    status: "Draft",
     content: [
       "Despite his defeat, Ulquiorra remains one of the most memorable Espada because of his cold logic and tragic destiny.",
       "He is remembered for his unwavering loyalty to Aizen and his exacting pursuit of truth in a world of illusion.",

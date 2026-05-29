@@ -1,5 +1,7 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Button from '../components/Button';
+import AuthService from '../services/AuthService.js';
 
 const inputClasses = 
   'mt-2 w-full rounded-xl border border-gray-700 bg-black px-4 py-3 text-sm text-white outline-none transition placeholder:text-gray-500 focus:border-gray-500 focus:bg-gray-900';
@@ -7,6 +9,52 @@ const inputClasses =
 const actionButtonClassName = 'w-full rounded-xl py-3 text-[11px] tracking-[0.2em]';
 
 const SignUpPage = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [username, setUsername] = useState('');
+  const [age, setAge] = useState('');
+  const [gender, setGender] = useState('male');
+  const [type, setType] = useState('editor');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    if (
+      !firstName.trim() ||
+      !lastName.trim() ||
+      !username.trim() ||
+      !email.trim() ||
+      !password.trim() ||
+      !age.trim() ||
+      !gender.trim()
+    ) {
+      setError('All fields are required to create an account.');
+      return;
+    }
+
+    try {
+      setError('');
+      await AuthService.register({
+        firstName,
+        lastName,
+        username,
+        email,
+        password,
+        age,
+        gender,
+        type,
+      });
+
+      navigate('/auth/signin');
+    } catch (err) {
+      setError(err.message || 'Unable to create account.');
+    }
+  };
+
   return (
     <>
       <div className="mb-8">
@@ -19,7 +67,7 @@ const SignUpPage = () => {
         </p>
       </div>
 
-      <form className="mt-12 space-y-6 bg-white/5 rounded-2xl border border-gray-700 p-8">
+      <form onSubmit={handleSubmit} className="mt-12 space-y-6 bg-white/5 rounded-2xl border border-gray-700 p-8">
         <div className="grid gap-6 sm:grid-cols-2">
           <div>
             <label htmlFor="first-name" className="text-sm font-semibold text-gray-300 uppercase tracking-[0.1em]">
@@ -30,6 +78,8 @@ const SignUpPage = () => {
               type="text"
               placeholder="Ulquiorra..."
               autoComplete="given-name"
+              value={firstName}
+              onChange={(event) => setFirstName(event.target.value)}
               className={inputClasses}
             />
           </div>
@@ -42,39 +92,114 @@ const SignUpPage = () => {
               type="text"
               placeholder="Cifer..."
               autoComplete="family-name"
+              value={lastName}
+              onChange={(event) => setLastName(event.target.value)}
               className={inputClasses}
             />
           </div>
         </div>
 
-        <div>
-          <label htmlFor="signup-email" className="text-sm font-semibold text-gray-300 uppercase tracking-[0.1em]">
-            Email Address
-          </label>
-          <input
-            id="signup-email"
-            type="email"
-            placeholder="hollow@aizen.com"
-            autoComplete="email"
-            className={inputClasses}
-          />
+        <div className="grid gap-6 sm:grid-cols-2">
+          <div>
+            <label htmlFor="signup-username" className="text-sm font-semibold text-gray-300 uppercase tracking-[0.1em]">
+              Username
+            </label>
+            <input
+              id="signup-username"
+              type="text"
+              placeholder="ulquiorra"
+              autoComplete="username"
+              value={username}
+              onChange={(event) => setUsername(event.target.value)}
+              className={inputClasses}
+            />
+          </div>
+          <div>
+            <label htmlFor="signup-age" className="text-sm font-semibold text-gray-300 uppercase tracking-[0.1em]">
+              Age
+            </label>
+            <input
+              id="signup-age"
+              type="text"
+              placeholder="26"
+              value={age}
+              onChange={(event) => setAge(event.target.value)}
+              className={inputClasses}
+            />
+          </div>
         </div>
 
-        <div>
-          <label htmlFor="signup-password" className="text-sm font-semibold text-gray-300 uppercase tracking-[0.1em]">
-            Cero Strength (Password)
-          </label>
-          <input
-            id="signup-password"
-            type="password"
-            placeholder="••••••••"
-            autoComplete="new-password"
-            className={inputClasses}
-          />
-          <p className="mt-3 text-xs leading-5 text-gray-400">
-            Power required: 8+ characters with letters, numbers, and symbols.
-          </p>
+        <div className="grid gap-6 sm:grid-cols-2">
+          <div>
+            <label htmlFor="signup-email" className="text-sm font-semibold text-gray-300 uppercase tracking-[0.1em]">
+              Email Address
+            </label>
+            <input
+              id="signup-email"
+              type="email"
+              placeholder="hollow@aizen.com"
+              autoComplete="email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              className={inputClasses}
+            />
+          </div>
+          <div>
+            <label htmlFor="signup-gender" className="text-sm font-semibold text-gray-300 uppercase tracking-[0.1em]">
+              Gender
+            </label>
+            <select
+              id="signup-gender"
+              value={gender}
+              onChange={(event) => setGender(event.target.value)}
+              className={inputClasses}
+            >
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
         </div>
+
+        <div className="grid gap-6 sm:grid-cols-2">
+          <div>
+            <label htmlFor="signup-password" className="text-sm font-semibold text-gray-300 uppercase tracking-[0.1em]">
+              Cero Strength (Password)
+            </label>
+            <input
+              id="signup-password"
+              type="password"
+              placeholder="••••••••"
+              autoComplete="new-password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              className={inputClasses}
+            />
+            <p className="mt-3 text-xs leading-5 text-gray-400">
+              Power required: 8+ characters with letters, numbers, and symbols.
+            </p>
+          </div>
+          <div>
+            <label htmlFor="signup-type" className="text-sm font-semibold text-gray-300 uppercase tracking-[0.1em]">
+              Account Type
+            </label>
+            <select
+              id="signup-type"
+              value={type}
+              onChange={(event) => setType(event.target.value)}
+              className={inputClasses}
+            >
+              <option value="editor">Editor</option>
+              <option value="viewer">Viewer</option>
+            </select>
+          </div>
+        </div>
+
+        {error && (
+          <div className="rounded-xl border border-red-500 bg-red-500/10 px-4 py-3 text-sm text-red-200">
+            {error}
+          </div>
+        )}
 
         <Button type="submit" variant="primary" className={actionButtonClassName}>
           Join the Espada

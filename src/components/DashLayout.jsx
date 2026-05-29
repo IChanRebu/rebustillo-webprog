@@ -26,50 +26,50 @@ import Button from '@mui/material/Button';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import ArticleIcon from '@mui/icons-material/Article';
 import LogoutIcon from '@mui/icons-material/Logout';
- 
+
 const drawerWidth = 280;
- 
+
 // Modern theme configuration
 const dashboardTheme = createTheme({
     palette: {
         mode: 'dark',
         primary: {
-            main: '#8b5cf6',
-            light: '#a78bfa',
-            dark: '#5b21b6',
+            main: '#ffffff',
+            light: '#f5f5f5',
+            dark: '#d1d5db',
         },
         secondary: {
-            main: '#22d3ee',
+            main: '#f8fafc',
         },
         background: {
             default: '#000000',
             paper: '#000000',
         },
         text: {
-            primary: '#e2e8f0',
-            secondary: '#94a3b8',
+            primary: '#f5f5f5',
+            secondary: '#d1d5db',
         },
-        divider: '#334155',
+        divider: '#374151',
         action: {
-            hover: 'rgba(79, 70, 229, 0.16)',
-            selected: 'rgba(79, 70, 229, 0.22)',
+            hover: '#111827',
+            selected: 'rgba(255, 255, 255, 0.08)',
         },
     },
     typography: {
         fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
-        h6: { fontWeight: 600, fontSize: '1.1rem', letterSpacing: '-0.5px' },
-        h5: { fontWeight: 600, fontSize: '1.5rem' },
-        body1: { fontSize: '0.95rem', lineHeight: 1.6 },
+        h6: { fontWeight: 700, fontSize: '1.1rem', letterSpacing: '-0.5px', color: '#f5f5f5' },
+        h5: { fontWeight: 700, fontSize: '1.5rem', color: '#f5f5f5' },
+        body1: { fontSize: '0.95rem', lineHeight: 1.6, color: '#d1d5db' },
     },
-    shape: { borderRadius: 14 },
+    shape: { borderRadius: 12 },
     components: {
         MuiAppBar: {
             styleOverrides: {
                 root: {
                     backgroundColor: '#000000',
-                    color: '#e2e8f0',
-                    boxShadow: '0 20px 60px rgba(15, 23, 42, 0.25)',
-                    borderBottom: '1px solid rgba(148, 163, 184, 0.12)',
+                    color: '#f5f5f5',
+                    boxShadow: '0 8px 24px rgba(0, 0, 0, 0.35)',
+                    borderBottom: '1px solid #374151',
                 },
             },
         },
@@ -77,8 +77,7 @@ const dashboardTheme = createTheme({
             styleOverrides: {
                 paper: {
                     backgroundColor: '#000000',
-                    color: '#e2e8f0',
-                    borderRight: '1px solid rgba(148, 163, 184, 0.12)',
+                    borderRight: '1px solid #374151',
                 },
             },
         },
@@ -86,14 +85,14 @@ const dashboardTheme = createTheme({
             styleOverrides: {
                 root: {
                     textTransform: 'none',
-                    fontWeight: 500,
+                    fontWeight: 700,
                     borderRadius: '10px',
                 },
             },
         },
     },
 });
- 
+
 const dashBoardNavItems = [
     {
         label: "Dashboard",
@@ -113,8 +112,14 @@ const dashBoardNavItems = [
         to: "/dashboard/users",
         icon: PeopleIcon,
     },
+    {
+        label: "Articles",
+        title: "Articles",
+        to: "/dashboard/articles",
+        icon: ArticleIcon,
+    },
 ];
- 
+
 const openedMixin = (theme) => ({
     width: drawerWidth,
     transition: theme.transitions.create('width', {
@@ -123,7 +128,7 @@ const openedMixin = (theme) => ({
     }),
     overflowX: 'hidden',
 });
- 
+
 const closedMixin = (theme) => ({
     transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.easeInOut,
@@ -135,7 +140,7 @@ const closedMixin = (theme) => ({
         width: `calc(${theme.spacing(9)} + 1px)`,
     },
 });
- 
+
 const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
@@ -143,7 +148,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     padding: theme.spacing(0, 1),
     ...theme.mixins.toolbar,
 }));
- 
+
 const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
@@ -161,7 +166,7 @@ const AppBar = styled(MuiAppBar, {
         }),
     }),
 }));
- 
+
 const Drawer = styled(MuiDrawer, {
     shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
@@ -178,7 +183,7 @@ const Drawer = styled(MuiDrawer, {
         '& .MuiDrawer-paper': closedMixin(theme),
     }),
 }));
- 
+
 const SearchIconWrapper = styled('div')(({ theme }) => ({
     padding: theme.spacing(0, 2),
     height: '100%',
@@ -189,20 +194,20 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
     justifyContent: 'center',
     color: '#94a3b8',
 }));
- 
+
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: '#0f172a',
-    border: '1px solid rgba(148, 163, 184, 0.16)',
+    backgroundColor: '#111827',
+    border: '1px solid rgba(255, 106, 0, 0.14)',
     '&:hover': {
-        backgroundColor: '#111827',
-        borderColor: 'rgba(79, 70, 229, 0.24)',
+        backgroundColor: '#161b26',
+        borderColor: 'rgba(107, 114, 128, 0.24)',
     },
     '&:focus-within': {
         backgroundColor: '#111827',
-        borderColor: '#8b5cf6',
-        boxShadow: '0 0 0 3px rgba(139, 92, 246, 0.12)',
+        borderColor: '#6b7280',
+        boxShadow: '0 0 0 3px rgba(107, 114, 128, 0.12)',
     },
     marginRight: theme.spacing(2),
     marginLeft: 0,
@@ -215,7 +220,7 @@ const Search = styled('div')(({ theme }) => ({
         duration: theme.transitions.duration.shorter,
     }),
 }));
- 
+
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: 'inherit',
     '& .MuiInputBase-input': {
@@ -224,7 +229,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
         transition: theme.transitions.create('width'),
         width: '100%',
         fontSize: '0.95rem',
-        color: '#e2e8f0',
+        color: '#f5f5f5',
         '&::placeholder': {
             color: '#94a3b8',
             opacity: 1,
@@ -234,29 +239,29 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
         },
     },
 }));
- 
+
 const getPageTitle = (pathname) =>
     dashBoardNavItems.find((item) => item.to === pathname)?.title || "Welcome";
- 
+
 const DashLayout = () => {
     const theme = useTheme();
     const [open, setOpen] = useState(false);
     const location = useLocation();
     const pageTitle = getPageTitle(location.pathname);
     const navigate = useNavigate();
- 
+
     const handleDrawerOpen = () => {
         setOpen(true);
     };
- 
+
     const handleDrawerClose = () => {
         setOpen(false);
     };
- 
+
     const handleLogout = () => {
         navigate("/");
     };
- 
+
     return (
         <ThemeProvider theme={dashboardTheme}>
             <Box sx={{ display: 'flex', bgcolor: '#000000', minHeight: '100vh' }}>
@@ -271,8 +276,8 @@ const DashLayout = () => {
                             edge="start"
                             sx={{
                                 marginRight: 3,
-                                color: '#4f46e5',
-                                '&:hover': { backgroundColor: 'rgba(79, 70, 229, 0.08)' },
+                                color: '#6b7280',
+                                '&:hover': { backgroundColor: 'rgba(107, 114, 128, 0.18)' },
                             }}
                         >
                             {open ? <MenuOpenIcon /> : <MenuIcon />}
@@ -284,7 +289,7 @@ const DashLayout = () => {
                             sx={{
                                 flexGrow: 1,
                                 fontWeight: 700,
-                                color: '#e2e8f0',
+                                color: '#f5f5f5',
                                 letterSpacing: '-0.5px',
                             }}
                         >
@@ -305,13 +310,13 @@ const DashLayout = () => {
                             onClick={handleLogout}
                             endIcon={<LogoutIcon />}
                             sx={{
-                                color: '#e2e8f0',
-                                borderColor: 'rgba(148, 163, 184, 0.24)',
+                                color: '#6b7280',
+                                borderColor: '#6b7280',
                                 border: '1px solid',
                                 ml: 2,
                                 '&:hover': {
-                                    backgroundColor: 'rgba(79, 70, 229, 0.12)',
-                                    borderColor: '#8b5cf6',
+                                    backgroundColor: 'rgba(107, 114, 128, 0.12)',
+                                    borderColor: '#9ca3af',
                                 },
                             }}
                         >
@@ -325,7 +330,7 @@ const DashLayout = () => {
                         <Typography
                             variant="h6"
                             sx={{
-                                color: '#4f46e5',
+                                color: '#6b7280',
                                 fontWeight: 700,
                                 mr: open ? 0 : 'auto',
                                 opacity: open ? 1 : 0,
@@ -342,7 +347,7 @@ const DashLayout = () => {
                             )}
                         </IconButton>
                     </DrawerHeader>
-                    <Divider sx={{ borderColor: '#e2e8f0' }} />
+                    <Divider sx={{ borderColor: '#374151' }} />
                     {/* Drawer List */}
                     <List sx={{ pt: 2 }}>
                         {dashBoardNavItems.map(({ label, to, icon: Icon }) => {
@@ -357,14 +362,14 @@ const DashLayout = () => {
                                             minHeight: 44,
                                             px: 2,
                                             justifyContent: open ? 'initial' : 'center',
-                                            borderRadius: '8px',
+                                            borderRadius: '12px',
                                             mx: 1,
-                                            color: isActive ? '#4f46e5' : '#64748b',
-                                            backgroundColor: isActive ? 'rgba(79, 70, 229, 0.08)' : 'transparent',
+                                            color: isActive ? '#6b7280' : '#d1d5db',
+                                            backgroundColor: isActive ? 'rgba(107, 114, 128, 0.16)' : 'transparent',
                                             '&:hover': {
-                                                backgroundColor: isActive ? 'rgba(79, 70, 229, 0.12)' : 'rgba(255,255,255,0.08)',
+                                                backgroundColor: isActive ? 'rgba(107, 114, 128, 0.22)' : 'rgba(255, 255, 255, 0.05)',
                                             },
-                                            fontWeight: isActive ? 600 : 500,
+                                            fontWeight: isActive ? 700 : 500,
                                         }}
                                     >
                                         <ListItemIcon
@@ -402,5 +407,5 @@ const DashLayout = () => {
         </ThemeProvider>
     );
 };
- 
+
 export default DashLayout;
