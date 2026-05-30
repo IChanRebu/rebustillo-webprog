@@ -19,6 +19,7 @@ app.use(express.json());
 app.use(jsonParser);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Curb Cores Error by adding a header here
 app.use((req, res, next) => {
@@ -37,6 +38,16 @@ app.use((req, res, next) => {
 // Routes
 app.use('/api/users', userRoutes);
 // app.use('/api/articles', articleRoutes);
+
+// Root route handler
+app.get('/', (req, res) => {
+  res.json({ message: 'Rebustillo API Server is running' });
+});
+
+// 404 handler
+app.use((req, res) => {
+  res.status(404).json({ message: 'Route not found' });
+});
 
 // Error Handling
 app.use((err, req, res, next) => {
