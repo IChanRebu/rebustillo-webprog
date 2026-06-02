@@ -1,4 +1,4 @@
-const API_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
+const API_URL = import.meta.env.VITE_API_BASE_URL || (typeof window !== 'undefined' ? `${window.location.origin}/api` : '/api');
 
 const handleResponse = async (response) => {
   const json = await response.json().catch(() => null);
@@ -18,7 +18,7 @@ const login = async (payload) => {
 
     return handleResponse(response);
   } catch (error) {
-    throw new Error('Unable to reach backend server. Make sure the Express server is running on port 5000.');
+    throw new Error('Unable to reach backend server. Please check your API URL and network connectivity.');
   }
 };
 
@@ -32,7 +32,7 @@ const register = async (payload) => {
 
     return handleResponse(response);
   } catch (error) {
-    throw new Error('Unable to reach backend server. Make sure the Express server is running on port 5000.');
+    throw new Error('Unable to reach backend server. Make sure the Express server is running on port 8000.');
   }
 };
 
