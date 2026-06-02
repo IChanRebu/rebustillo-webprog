@@ -13,8 +13,6 @@
     }
   ],
   "env": {
-    "MONGODB_URI": "@mongo_uri",
-    "JWT_SECRET": "@jwt_secret",
     "NODE_ENV": "production",
     "FRONTEND_URL": "https://rebustillo-webprog.vercel.app"
   }
