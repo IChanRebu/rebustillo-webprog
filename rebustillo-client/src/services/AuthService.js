@@ -32,7 +32,7 @@ const register = async (payload) => {
 
     return handleResponse(response);
   } catch (error) {
-    throw new Error('Unable to reach backend server. Make sure the Express server is running on port 8000.');
+    throw new Error('Unable to reach backend server. Please check your API URL and network connectivity.');
   }
 };
 
