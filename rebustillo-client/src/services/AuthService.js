@@ -1,4 +1,4 @@
-const API_URL = import.meta.env.VITE_API_BASE_URL || (typeof window !== 'undefined' ? `${window.location.origin}/api` : '/api');
+const API_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api';
 
 const handleResponse = async (response) => {
   const json = await response.json().catch(() => null);
