@@ -1,21 +1,12 @@
-const express = require('express');
-
-// import functions
-const {
-  getUsers,
-  createUser,
-  updateUser,
-  deleteUser,
-  loginUser,
-} = require('../controller/userController');
+import express from 'express';
+import { getUsers, createUser, updateUser, deleteUser, loginUser } from '../controllers/userController.js';
 
 const router = express.Router();
-
-// Define /login route BEFORE /:id to prevent route matching conflict
-router.post('/login', loginUser);
 
 router.route('/').get(getUsers).post(createUser);
 
 router.route('/:id').put(updateUser).delete(deleteUser);
 
-module.exports = router;
+router.post('/login', loginUser);
+
+export default router;
