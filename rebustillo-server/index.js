@@ -20,13 +20,28 @@ const allowedOrigins = [
   'http://127.0.0.1:8000',
 ];
 
-app.use(
-  cors({
-    origin: allowedOrigins,
-    credentials: true,
-    optionsSuccessStatus: 200,
-  })
-);
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (!origin) {
+      return callback(null, true);
+    }
+
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+
+    if (process.env.NODE_ENV !== 'production' && /^(https?:\/\/)(localhost|127\.0\.0\.1|\d+\.\d+\.\d+\.\d+)(:\d+)?$/.test(origin)) {
+      return callback(null, true);
+    }
+
+    callback(new Error(`CORS policy blocked origin: ${origin}`));
+  },
+  credentials: true,
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 
 app.use(express.json());
 
