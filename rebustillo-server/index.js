@@ -4,14 +4,11 @@ const cors = require('cors');
 const path = require('path');
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
+const mongoose = require('mongoose');
 const connectDB = require('./config/db');
 const userRoutes = require('./routes/useRoutes');
-// const articleRoutes = require('./routes/articleRoutes');
 
 const app = express();
-
-// Database Connection
-connectDB();
 
 const allowedOrigins = [
   process.env.FRONTEND_URL || 'https://rebustillo-webprog.vercel.app',
@@ -35,11 +32,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
 app.use('/api/users', userRoutes);
-// app.use('/api/articles', articleRoutes);
 
 // Root route handler
 app.get('/', (req, res) => {
   res.json({ message: 'Rebustillo API Server is running' });
+});
+
+// Health-check endpoint
+app.get('/health', (req, res) => {
+  const state = mongoose.connection && mongoose.connection.readyState;
+  // 1 = connected, 0 = disconnected
+  const dbStatus = state === 1 ? 'connected' : 'disconnected';
+  res.json({ status: 'ok', db: dbStatus });
 });
 
 // 404 handler
@@ -55,8 +59,17 @@ app.use((err, req, res, next) => {
 
 const PORT = process.env.PORT || 5000;
 
-if (require.main === module) {
-  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-}
+const startServer = async () => {
+  const conn = await connectDB();
+  if (!conn) {
+    console.warn('DB not connected. Starting server anyway — DB operations may fail.');
+  }
+
+  if (require.main === module) {
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+  }
+};
+
+startServer();
 
 module.exports = app;

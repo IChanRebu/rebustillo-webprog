@@ -1,9 +1,20 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs"); // For password hashing
 const jwt = require("jsonwebtoken"); // For generating tokens
+const mongoose = require('mongoose');
+
+const ensureDB = (res) => {
+  const state = mongoose.connection && mongoose.connection.readyState;
+  if (state !== 1) {
+    res.status(503).json({ message: 'Database not available' });
+    return false;
+  }
+  return true;
+};
 
 const getUsers = async (req, res) => {
   try {
+    if (!ensureDB(res)) return;
     const users = await User.find({}, "-password"); // Exclude the password field
     res.json({ users });
   } catch (error) {
@@ -13,6 +24,7 @@ const getUsers = async (req, res) => {
 
 const createUser = async (req, res) => {
   try {
+    if (!ensureDB(res)) return;
     // Ensure the password is included in the request body
     if (!req.body.password) {
       return res.status(400).json({ message: "Password is required" });
@@ -31,6 +43,7 @@ const createUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
   try {
+    if (!ensureDB(res)) return;
     // Check if the password is being updated
     if (req.body.password) {
       req.body.password = await bcrypt.hash(req.body.password, 10);
@@ -47,6 +60,7 @@ const updateUser = async (req, res) => {
 
 const deleteUser = async (req, res) => {
   try {
+    if (!ensureDB(res)) return;
     await User.findByIdAndDelete(req.params.id);
 
     res.json({ message: "User deleted successfully" });
@@ -57,6 +71,7 @@ const deleteUser = async (req, res) => {
 
 const loginUser = async (req, res) => {
   try {
+    if (!ensureDB(res)) return;
     const { email, password } = req.body;
 
     // Find the user by email
