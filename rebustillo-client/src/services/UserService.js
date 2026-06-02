@@ -1,49 +1,28 @@
-const API_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api/users';
+UserService.js
 
-const handleResponse = async (response) => {
-  if (!response.ok) {
-    const errorData = await response.json().catch(() => null);
-    throw new Error(errorData?.message || response.statusText || 'Request failed');
-  }
-  return response.json();
+import axios from "axios";
+import constants from "../constants";
+
+const API = axios.create({
+  baseURL: `${constants.HOST}/users`,
+});
+
+export const fetchUsers = () => {
+  return API.get("/");
 };
 
-const getUsers = async () => {
-  const response = await fetch(API_URL, {
-    headers: { 'Content-Type': 'application/json' },
-  });
-  return handleResponse(response);
+export const createUser = (user) => {
+  return API.post("/", user);
 };
 
-const createUser = async (payload) => {
-  const response = await fetch(API_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload),
-  });
-  return handleResponse(response);
+export const updateUser = (id, user) => {
+  return API.put(`/${id}`, user);
 };
 
-const updateUser = async (id, payload) => {
-  const response = await fetch(`${API_URL}/${id}`, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload),
-  });
-  return handleResponse(response);
+export const deleteUser = (id) => {
+  return API.delete(`/${id}`);
 };
 
-const deleteUser = async (id) => {
-  const response = await fetch(`${API_URL}/${id}`, {
-    method: 'DELETE',
-    headers: { 'Content-Type': 'application/json' },
-  });
-  return handleResponse(response);
-};
-
-export default {
-  getUsers,
-  createUser,
-  updateUser,
-  deleteUser,
+export const loginUser = (credentials) => {
+  return API.post("/login", credentials);
 };

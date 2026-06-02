@@ -1,5 +1,9 @@
-const HOST = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api';
+const rawHost = import.meta.env.VITE_API_URL || "http://localhost:8000";
+const normalizedHost = rawHost.replace(/\/+$/, '');
+const HOST = normalizedHost.endsWith('/api') ? normalizedHost : `${normalizedHost}/api`;
 
-export default {
+const constants = {
   HOST,
-}
+};
+
+export default constants;
