@@ -17,6 +17,7 @@
     "@mui/x-charts": "^9.0.4",
     "@mui/x-data-grid": "^9.0.4",
     "@tailwindcss/vite": "^4.2.2",
+    "axios": "^1.16.1",
     "bcryptjs": "^3.0.3",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
