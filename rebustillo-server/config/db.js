@@ -1,20 +1,23 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
+const dns = require('dns');
+
+// Override local DNS to fix querySrv ECONNREFUSED error in Node.js
+if (!process.env.VERCEL) {
+    dns.setServers(['8.8.8.8', '8.8.4.4']);
+}
 
 const connectDB = async () => {
-  try {
-    await mongoose.connect(process.env.MONGO_URI, {
-      serverSelectionTimeoutMS: 10000,
-      socketTimeoutMS: 45000,
-    });
-
-    console.log("MongoDB Connected");
-  } catch (error) {
-    console.error("MongoDB connection error:", error.message);
-    console.error("Server will continue running but database operations will fail.");
-    console.error("Please check: 1) Your IP is whitelisted in MongoDB Atlas Network Access");
-    console.error("              2) Your network/firewall allows DNS SRV lookups");
-    console.error("              3) The Atlas cluster is active and not paused");
-  }
+    // Connect MongoDB at default port 27017.
+    console.log("=== DB CONNECTION ATTEMPTING... ===");
+    try {
+        const conn = await mongoose.connect(process.env.MONGO_URI, {
+            // Options
+        });
+        console.log(`=== DB SUCCESS: ${conn.connection.host} ===`);
+    } catch (error) {
+        console.error(`Error: ${error.message}`);
+        process.exit(1); // Exit process with failure
+    }
 };
 
 module.exports = connectDB;
