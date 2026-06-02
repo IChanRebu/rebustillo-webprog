@@ -18,7 +18,7 @@ const login = async (payload) => {
 
     return handleResponse(response);
   } catch (error) {
-    throw new Error('Unable to reach backend server. Please check your API URL and network connectivity.');
+    throw new Error(error.message || 'Unable to reach backend server. Please check your API URL and network connectivity.');
   }
 };
 
@@ -32,7 +32,7 @@ const register = async (payload) => {
 
     return handleResponse(response);
   } catch (error) {
-    throw new Error('Unable to reach backend server. Please check your API URL and network connectivity.');
+    throw new Error(error.message || 'Unable to reach backend server. Please check your API URL and network connectivity.');
   }
 };
 

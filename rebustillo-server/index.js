@@ -13,13 +13,18 @@ const app = express();
 const allowedOrigins = [
   process.env.FRONTEND_URL || 'https://rebustillo-webprog.vercel.app',
   'http://localhost:5173',
+  'http://127.0.0.1:5173',
+  'http://localhost:4173',
+  'http://127.0.0.1:4173',
   'http://localhost:8000',
+  'http://127.0.0.1:8000',
 ];
 
 app.use(
   cors({
     origin: allowedOrigins,
     credentials: true,
+    optionsSuccessStatus: 200,
   })
 );
 
