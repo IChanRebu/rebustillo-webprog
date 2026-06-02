@@ -1,6 +1,6 @@
 const Article = require('../models/ArticleModel');
 
-const getUsers = async (req, res) => {
+const getArticles = async (req, res) => {
     try {
         const articles = await Article.find();
         res.json({ articles });
@@ -9,7 +9,7 @@ const getUsers = async (req, res) => {
     }
 };
 
-const createUser = async (req, res) => {
+const createArticle = async (req, res) => {
     try {
         const article = new Article(req.body);
         const savedArticle = await article.save();
@@ -19,7 +19,7 @@ const createUser = async (req, res) => {
     }
 };
 
-const updateUser = async (req, res) => {
+const updateArticle = async (req, res) => {
     try {
         const { id } = req.params;
         const article = await Article.findByIdAndUpdate(id, req.body, { new: true });
@@ -29,7 +29,7 @@ const updateUser = async (req, res) => {
     }
 };
 
-const deleteUser = async (req, res) => {
+const deleteArticle = async (req, res) => {
     try {
         const { id } = req.params;
         await Article.findByIdAndDelete(id);
@@ -39,4 +39,4 @@ const deleteUser = async (req, res) => {
     }
 };
 
-module.exports = { getUsers, createUser, updateUser, deleteUser };
+module.exports = { getArticles, createArticle, updateArticle, deleteArticle };
