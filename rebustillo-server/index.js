@@ -13,27 +13,25 @@ const app = express();
 // Database Connection
 connectDB();
 
+const allowedOrigins = [
+  process.env.FRONTEND_URL || 'https://rebustillo-webprog.vercel.app',
+  'http://localhost:5173',
+  'http://localhost:8000',
+];
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 
 // Middleware
 app.use(jsonParser);
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
-
-// Curb Cores Error by adding a header here
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PUT, DELETE, PATCH, OPTIONS"
-  );
-  next();
-});
 
 // Routes
 app.use('/api/users', userRoutes);
@@ -56,4 +54,9 @@ app.use((err, req, res, next) => {
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+if (require.main === module) {
+  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+}
+
+module.exports = app;
